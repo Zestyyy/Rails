@@ -18,14 +18,19 @@ default: &default
   adapter: postgresql
   encoding: unicode
   username: ubuntu #default if not created
-
+  password:
   # For details on connection pooling, see rails configuration guide
   # http://guides.rubyonrails.org/configuring.html#database-pooling
   pool: 5
 
 development:
-  <<: *default
+  # <<: *default
+  adapter: postgresqle
+  encoding: unicode
   database: rails_exam2_development
+  pool: 5
+  username: ubuntu
+  password:
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
@@ -58,8 +63,13 @@ development:
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
 test:
-  <<: *default
+  # <<: *default
+  adapter: postgresql
+  encoding: unicode
   database: rails_exam2_test
+  pool: 5
+  username: ubuntu
+  password:
 
 # As with config/secrets.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
@@ -81,7 +91,10 @@ test:
 #     url: <%= ENV['DATABASE_URL'] %>
 #
 production:
-  <<: *default
+  # <<: *default
+  adapter: postgresql
+  encoding: unicode
   database: rails_exam2_production
+  pool: 5
   username: ubuntu
   password: <%= ENV['RAILS_EXAM2_DATABASE_PASSWORD'] %>
