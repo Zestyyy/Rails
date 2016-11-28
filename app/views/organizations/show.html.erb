@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Organization Page</title>
+    </head>
+    <body>
+        <a href="/organizations">Dashboard</a> |
+        <form action="/sessions" method='post' style='display:inline'>
+            <input type='hidden' name='_method' value='delete'>
+            <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+            <input type='submit' value='Logout'>
+        </form>
+
+        <hr>
+
+        <h2><%= @organization.name %></h2>
+        <p><%= @organization.description %></p>
+        <% if @organization.users_joined.ids.include?(current_user.id) %>
+            <form action="/joins" method='post'>
+                <input type='hidden' name='_method' value='delete'>
+                <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+                <input type='hidden' name='organization_id' value='<%= @organization.id %>'>
+                <input type='submit' value='Leave Group'>
+            </form>
+        <% else %>
+            <form action='/joins/create' method='post'>
+                <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+                <input type='hidden' name='organization_id' value='<%= @organization.id %>'>
+                <input type='submit' value='Join Group'>
+            </form>
+        <% end %>
+
+        <hr>
+
+        <p style='color:maroon'><b>Created By:</b>
+            <% if @organization.user.id == current_user.id %>
+                YOU
+            <% else %>
+                <%= @organization.user.first_name %> <%= @organization.user.last_name %>
+            <% end %>
+        </p>
+
+        <p><b>Members:</b></p>
+        <% @organization.users_joined.each do |user| %>
+            <ul style='list-style:none'>
+                <li><%= user.first_name %> <%= user.last_name %></li>
+            </ul>
+        <% end %>
+    </body>
+</html>

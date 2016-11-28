@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Login Registration Page</title>
+    </head>
+    <body>
+        <h2>Register</h2>
+        <form action='/users/create' method='post'>
+            <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+            <table>
+                <tr>
+                    <td>First Name: </td>
+                    <td><input type='text' name='f_name'></td>
+                </tr>
+                <tr>
+                    <td>Last Name: </td>
+                    <td><input type='text' name='l_name'></td>
+                </tr>
+                <tr>
+                    <td>Email: </td>
+                    <td><input type='text' name='email'></td>
+                </tr>
+                <tr>
+                    <td>Password: </td>
+                    <td><input type='text' name='password'></td>
+                </tr>
+                <tr>
+                    <td>Confirm PW: </td>
+                    <td><input type='text' name='confirm_pw'></td>
+                </tr>
+            </table>
+            <input type='submit' value='Register'>
+            <%= flash[:error] %>
+        </form>
+
+        <hr>
+
+        <h2>Login</h2>
+        <form action='/sessions/new' method='post'>
+            <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+            <table>
+                <tr>
+                    <td>Email: </td>
+                    <td><input type='text' name='email'></td>
+                </tr>
+                <tr>
+                    <td>Password: </td>
+                    <td><input type='text' name='password'></td>
+                </tr>
+            </table>
+            <input type='submit' value='Login'>
+            <%= flash[:log_error] %>
+        </form>
+    </body>
+</html>
