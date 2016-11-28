@@ -15,7 +15,6 @@
 # gem 'pg'
 #
 default: &default
-  host: localhost
   adapter: postgresql
   encoding: unicode
   username: ubuntu #default if not created
@@ -84,5 +83,5 @@ test:
 production:
   <<: *default
   database: rails_exam2_production
-  username: rails_exam2
+  username: ubuntu
   password: <%= ENV['RAILS_EXAM2_DATABASE_PASSWORD'] %>
